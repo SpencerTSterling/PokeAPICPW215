@@ -14,7 +14,7 @@ namespace PokeAPICore
         static readonly HttpClient client = new HttpClient();
 
         /// <summary>
-        /// retrieve pokemon by name
+        /// Retrieve Pokemon by name
         /// </summary>
         /// <exception cref="HttpRequestException"></exception>
         /// <param name="name"></param>
@@ -24,6 +24,11 @@ namespace PokeAPICore
         {
             name = name.ToLower(); // Pokemon name MUST be lowercase
 
+            return await GetPokemonByNameOrId(name);
+        }
+
+        private static async Task<Pokemon> GetPokemonByNameOrId(string name)
+        {
             string url = $"https://pokeapi.co/api/v2/pokemon/{name}";
             HttpResponseMessage response = await client.GetAsync(url);
             if (response.IsSuccessStatusCode)
@@ -41,9 +46,14 @@ namespace PokeAPICore
             }
         }
 
-        public void GetPokemonById(int id)
+        /// <summary>
+        /// Retrieve Pokemon by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<Pokemon> GetPokemonById(int id)
         {
-            throw new NotImplementedException();
+            return await GetPokemonByNameOrId(id.ToString());
         }
 
 
