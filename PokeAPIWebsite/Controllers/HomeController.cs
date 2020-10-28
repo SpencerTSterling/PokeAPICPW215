@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using PokeAPICore;
 using PokeAPIWebsite.Models;
 
 namespace PokeAPIWebsite.Controllers
@@ -18,9 +19,23 @@ namespace PokeAPIWebsite.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            PokeApiClient myClient = new PokeApiClient();
+            Pokemon result = await myClient.GetPokemonById(1);
+
+            var entry = new PokedexEntryViewModel()
+            {
+                Id = result.id,
+                Name = result.name,
+                Height = result.height.ToString(),
+                Weight = result.weight.ToString(),
+                PokedexImageUrl = result.sprites.front_default,
+                // add movelist
+                MoveList = new List<string>()
+            };
+
+            return View(entry);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
