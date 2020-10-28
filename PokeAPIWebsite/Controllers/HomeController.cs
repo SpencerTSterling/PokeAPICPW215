@@ -42,6 +42,9 @@ namespace PokeAPIWebsite.Controllers
                 PokedexImageUrl = result.sprites.FrontDefault,
                 MoveList = resultMoves
             };
+            entry.Name = entry.Name[0].ToString().ToUpper() + 
+                         entry.Name.Substring(1);
+                        
 
             return View(entry);
         }
