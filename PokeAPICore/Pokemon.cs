@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -13,7 +14,7 @@ namespace PokeAPICore
         private int height1;
 
         public int id { get; set; }
-        public string name { get; set; }
+        public string Name { get; set; }
         /// <summary>
         /// The base experience gained for defeating this pokemon
         /// </summary>
@@ -21,7 +22,7 @@ namespace PokeAPICore
         /// <summary>
         /// The height of this Pokemon in inches
         /// </summary>
-        public int height
+        public int Height
         {
             // height values are stored as decimeters
             get => (int)Math.Ceiling(height1 * InchesPerDecimeter);
@@ -35,7 +36,7 @@ namespace PokeAPICore
         /// <summary>
         /// The weight of the Pokemon in hectograms
         /// </summary>
-        public int weight { get; set; }
+        public int Weight { get; set; }
         public Ability[] abilities { get; set; }
         public Form[] forms { get; set; }
         public Game_Indices[] game_indices { get; set; }
@@ -62,7 +63,8 @@ namespace PokeAPICore
         public string front_female { get; set; }
         public string front_shiny_female { get; set; }
         public string back_shiny { get; set; }
-        public string front_default { get; set; }
+        [JsonProperty("front_default")]
+        public string FrontDefault { get; set; }
         public string front_shiny { get; set; }
         public Other other { get; set; }
         public Versions versions { get; set; }
