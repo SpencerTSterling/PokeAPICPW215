@@ -10,6 +10,8 @@ namespace PokeAPIWebsite.Models
         /// <summary>
         /// Infomation for a single Pokedex entry
         /// </summary>
+
+        public string PokedexImageUrl { get; set; }
         public string Nanme { get; set; }
         public int Id { get; set; }
         public string Height { get; set; }
