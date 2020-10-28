@@ -24,6 +24,15 @@ namespace PokeAPIWebsite.Controllers
             PokeApiClient myClient = new PokeApiClient();
             Pokemon result = await myClient.GetPokemonById(1);
 
+            List<string> resultMoves = new List<string>();
+
+            foreach (Move currentMove in result.moves)
+            {
+                resultMoves.Add(currentMove.move.name);
+            }
+
+            resultMoves.Sort();
+
             var entry = new PokedexEntryViewModel()
             {
                 Id = result.id,
@@ -31,8 +40,7 @@ namespace PokeAPIWebsite.Controllers
                 Height = result.height.ToString(),
                 Weight = result.weight.ToString(),
                 PokedexImageUrl = result.sprites.front_default,
-                // add movelist
-                MoveList = new List<string>()
+                MoveList = resultMoves
             };
 
             return View(entry);
