@@ -17,9 +17,9 @@ namespace PokeAPIConsole
                 Pokemon result = await client.GetPokemonByName("Bulbasaur");
 
                 Console.WriteLine($" PokemonID: {result.id} " +
-                                  $"\n Name: {result.name} " +
-                                  $"\n Weight (hectograms): {result.weight} " +
-                                  $"\n Height (inches): {result.height} ");
+                                  $"\n Name: {result.Name} " +
+                                  $"\n Weight (hectograms): {result.Weight} " +
+                                  $"\n Height (inches): {result.Height} ");
             }
             catch(ArgumentException)
             {
